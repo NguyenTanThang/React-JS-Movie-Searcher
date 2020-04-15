@@ -78,9 +78,6 @@ class MovieList extends Component {
         } else {
             this.callTheOMDB()
         }
-
-        
-        
     }
 
     onChange = (e) => {
