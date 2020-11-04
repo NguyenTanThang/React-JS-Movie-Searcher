@@ -13,6 +13,12 @@ class MovieList extends Component {
         totalResults: 0
     }
 
+    componentDidMount() {
+        this.setState({
+            searchTitle: localStorage.getItem("searchTitle")
+        })
+    }
+
     callTheOMDB = () => {
         const {currentPage} = this.state;
         const movieTitle = this.state.searchTitle;
@@ -71,6 +77,8 @@ class MovieList extends Component {
         const {currentPage} = this.state;
         const movieTitle = this.state.searchTitle;
 
+        localStorage.setItem("searchTitle", movieTitle);
+
         if (movieTitle == ""){
             this.setState({
                 errorMessage: "There is no movie match the search parameters"
@@ -122,7 +130,7 @@ class MovieList extends Component {
         ) :
         (
             <div className="container">
-                <h6 className="text-center">
+                <h6 className="text-center page-num">
                     {this.state.currentPage} / {Math.ceil(this.state.totalResults / 10)}
                 </h6>
                 <Pagination onNextPage={this.onNextPage} onPreviousPage={this.onPreviousPage} onFirstPage={this.onFirstPage} onLastPage={this.onLastPage}  currentPage={this.state.currentPage} totalResults={this.state.totalResults}/>
@@ -134,7 +142,7 @@ class MovieList extends Component {
         return (
             <div>
 
-                <div className="container mt-4 mb-4">
+                <div className="container mt-4 mb-4 header">
                     <h1 className="text-center">Movie Searcher</h1>
                 </div>
 
